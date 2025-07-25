@@ -25,7 +25,6 @@ public class GlobalScore : MonoBehaviour
             return;
         }
 
-        // Cargar HighScore de PlayerPrefs
         totalHighscore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
@@ -38,7 +37,6 @@ public class GlobalScore : MonoBehaviour
     {
         currentScore += amount;
 
-        // Si superamos el récord, lo actualizamos y guardamos
         if (currentScore > totalHighscore)
         {
             totalHighscore = currentScore;

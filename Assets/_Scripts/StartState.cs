@@ -5,14 +5,11 @@ public class StartState : IGameState
 
     public void Enter()
     {
-        // 1) Apaga textos de resultado
         ctrl.correctText.SetActive(false);
         ctrl.incorrectText.SetActive(false);
 
-        // 2) Apaga todas las cartas
         ctrl.TurnOffCards();
 
-        // 3) Muestra sólo el botón Deal
         ctrl.ToggleButtons(hi: false, lo: false, /*equal: false,*/ deal: true);
     }
 

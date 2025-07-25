@@ -26,7 +26,6 @@ public class CardControl : MonoBehaviour
     public void OnGuessLo() => stateMachine.ChangeState(new GuessingState(this, false));
     //public void OnGuessEqual() => stateMachine.ChangeState(new EqualGuessingState(this));
 
-    // Helpers de UI
     public void ToggleButtons(bool hi, bool lo, /*bool equal,*/ bool deal)
     {
         hiButton.SetActive(hi);
@@ -50,7 +49,7 @@ public class CardControl : MonoBehaviour
 
     public IEnumerator RestartAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);  // espera no bloqueante :contentReference[oaicite:0]{index=0}
+        yield return new WaitForSeconds(delay);
         stateMachine.ChangeState(new StartState(this));
     }
 }

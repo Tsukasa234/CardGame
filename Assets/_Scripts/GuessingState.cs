@@ -22,7 +22,6 @@ public class GuessingState : IGameState
 
         ctrl.ShowResult(correct);
 
-        // Suma o reinicia según acierto o fallo
         if (correct)
             GlobalScore.Instance.AddScore(100);
         else
