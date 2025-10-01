@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Estado de adivinanza "igual".
+/// </summary>
 public class EqualGuessingState : IGameState
 {
     private readonly CardControl ctrl;
@@ -11,15 +14,15 @@ public class EqualGuessingState : IGameState
 
     public void Enter()
     {
-        int newIndex = Random.Range(0, ctrl.turningRightCards.Length);
-        ctrl.turningRightCards[newIndex].SetActive(true);
+        int rightIndex = Random.Range(0, ctrl.turningRightCards.Length);
+        ctrl.turningRightCards[rightIndex].SetActive(true);
 
-        bool correct = newIndex == ctrl.dealtCardNumber;
-        ctrl.ShowResult(correct);
+        bool isCorrect = rightIndex == ctrl.dealtCardNumber;
+        ctrl.ShowResult(isCorrect);
 
-        if (correct)
+        if (isCorrect)
         {
-            GlobalScore.Instance.AddScore(100 * 5);
+            GlobalScore.Instance.AddScore(500); // 100 * 5
         }
         else
         {

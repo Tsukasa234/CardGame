@@ -1,5 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
+/// <summary>
+/// Estado de adivinanza "mayor" o "menor".
+/// </summary>
 public class GuessingState : IGameState
 {
     private readonly CardControl ctrl;
@@ -13,23 +17,29 @@ public class GuessingState : IGameState
 
     public void Enter()
     {
-        int i = Random.Range(0, ctrl.turningRightCards.Length);
-        ctrl.turningRightCards[i].SetActive(true);
+        int rightIndex = Random.Range(0, ctrl.turningRightCards.Length);
+        ctrl.turningRightCards[rightIndex].SetActive(true);
 
-        bool correct = guessHigh
-            ? i >= ctrl.dealtCardNumber
-            : i <= ctrl.dealtCardNumber;
+        // Lógica estricta: mayor o menor
+        bool isCorrect = guessHigh
+            ? rightIndex > ctrl.dealtCardNumber
+            : rightIndex < ctrl.dealtCardNumber;
 
-        ctrl.ShowResult(correct);
+        ctrl.ShowResult(isCorrect);
 
-        if (correct)
+        if (isCorrect)
             GlobalScore.Instance.AddScore(100);
         else
             GlobalScore.Instance.ResetScore();
 
-        ctrl.stateMachine.ChangeState(new GameOverState(ctrl));
+        // Espera 3 segundos y reparte automáticamente una nueva carta
+        ctrl.StartCoroutine(DealAfterDelay(3f));
+    }
 
-
+    private IEnumerator DealAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ctrl.OnDealButton();
     }
 
     public void Update() { }

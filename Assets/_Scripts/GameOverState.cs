@@ -1,3 +1,6 @@
+/// <summary>
+/// Estado de fin de juego. Reinicia tras un retraso.
+/// </summary>
 public class GameOverState : IGameState
 {
     private readonly CardControl ctrl;
@@ -5,6 +8,7 @@ public class GameOverState : IGameState
 
     public void Enter()
     {
+        // Reinicia el juego después de 5 segundos
         ctrl.StartCoroutine(ctrl.RestartAfterDelay(5f));
     }
 

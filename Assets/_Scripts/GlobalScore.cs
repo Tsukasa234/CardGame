@@ -1,6 +1,9 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Singleton para la gestión de puntuaciones globales y UI.
+/// </summary>
 public class GlobalScore : MonoBehaviour
 {
     public static GlobalScore Instance { get; private set; }
@@ -8,8 +11,8 @@ public class GlobalScore : MonoBehaviour
     public int currentScore = 0;
     public int totalHighscore = 0;
 
-    public TextMeshProUGUI currentScoreText;
-    public TextMeshProUGUI highscoreText;
+    [SerializeField] public TextMeshProUGUI currentScoreText;
+    [SerializeField] public TextMeshProUGUI highscoreText;
 
     private void Awake()
     {
@@ -33,6 +36,9 @@ public class GlobalScore : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
+    /// Añade puntos y actualiza el récord si es necesario.
+    /// </summary>
     public void AddScore(int amount)
     {
         currentScore += amount;
@@ -47,15 +53,23 @@ public class GlobalScore : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
+    /// Reinicia la puntuación actual.
+    /// </summary>
     public void ResetScore()
     {
         currentScore = 0;
         UpdateUI();
     }
 
+    /// <summary>
+    /// Actualiza la UI de puntuaciones.
+    /// </summary>
     private void UpdateUI()
     {
-        currentScoreText.text = $"{currentScore}";
-        highscoreText.text = $"{totalHighscore}";
+        if (currentScoreText != null)
+            currentScoreText.text = $"{currentScore}";
+        if (highscoreText != null)
+            highscoreText.text = $"{totalHighscore}";
     }
 }

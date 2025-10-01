@@ -1,3 +1,6 @@
+/// <summary>
+/// Estado inicial del juego. Prepara la UI y las cartas.
+/// </summary>
 public class StartState : IGameState
 {
     private readonly CardControl ctrl;
@@ -10,7 +13,8 @@ public class StartState : IGameState
 
         ctrl.TurnOffCards();
 
-        ctrl.ToggleButtons(hi: false, lo: false, /*equal: false,*/ deal: true);
+        // Solo el botón de repartir activo
+        ctrl.ToggleButtons(hi: false, lo: false, equal: false, deal: true);
     }
 
     public void Update() { }

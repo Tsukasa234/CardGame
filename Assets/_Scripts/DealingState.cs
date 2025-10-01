@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Estado de reparto de carta inicial.
+/// </summary>
 public class DealingState : IGameState
 {
     private readonly CardControl ctrl;
@@ -8,10 +11,11 @@ public class DealingState : IGameState
     public void Enter()
     {
         ctrl.TurnOffCards();
-        int i = Random.Range(0, ctrl.dealingLeftCard.Length);
-        ctrl.dealingLeftCard[i].SetActive(true);
-        ctrl.dealtCardNumber = i;
-        ctrl.ToggleButtons(hi: true, lo: true, /*equal: true,*/ deal: false);
+        int index = Random.Range(0, ctrl.dealingLeftCard.Length);
+        ctrl.dealingLeftCard[index].SetActive(true);
+        ctrl.dealtCardNumber = index;
+        // Habilitar todos los botones de adivinanza
+        ctrl.ToggleButtons(hi: true, lo: true, equal: true, deal: false);
     }
 
     public void Update() { }
